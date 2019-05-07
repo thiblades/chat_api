@@ -1,6 +1,6 @@
 "use strict";
 
-var User = require("../model/appModel.js");
+var User = require("../model/userModel.js");
 
 exports.list_all_users = function(req, res) {
   User.getAllUser(function(err, User) {
