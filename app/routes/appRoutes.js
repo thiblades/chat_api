@@ -1,14 +1,16 @@
 'use strict';
 
 module.exports = function(app) {
-  var chat = require('../controller/appController');
-  console.log('testute Route : ', chat);
+  var user = require('../controller/userController');
+  console.log('testute Route : ', user);
 
   // Users Routes
   app.route('/users')
-    .get(chat.list_all_users)
-
-  app.route('/users/connexion')
-    .post(chat.connect_user);    
+    .get(user.list_all_users)
+    .post(user.create_a_user);
+  app.route('/users/login')
+    .post(user.connect_user);    
     //.post(chat.create_a_user);
+  app.route('/users/logout')
+    .post(user.logout_user);
 };

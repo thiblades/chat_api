@@ -6,23 +6,24 @@ var User = function(User) {
   this.pseudo = User.pseudo;
   this.passe = User.passe;
   this.admin = User.admin;
+  this.id = User.id;
   this.couleur = User.couleur;
   this.connecte = User.connecte;
 };
 
-// User.createUser = function createUser(newUser, result) {
-//         sql.query("INSERT INTO users set ?", newUser, function (err, res) {
+User.createUser = function createUser(newUser, result) {
+        sql.query("INSERT INTO users set ?", newUser, function (err, res) {
 
-//                 if(err) {
-//                     console.log("error: ", err);
-//                     result(err, null);
-//                 }
-//                 else{
-//                     console.log(res.insertId);
-//                     result(null, res.insertId);
-//                 }
-//             });
-// };
+                if(err) {
+                    console.log("error: ", err);
+                    result(err, null);
+                }
+                else{
+                    console.log(res.insertId);
+                    result(null, res.insertId);
+                }
+            });
+};
 
 User.getAllUser = function getAllUser(result) {
   sql.query("Select * from users", function(err, res) {
@@ -46,11 +47,26 @@ User.connectUser = function connectUser(user, result) {
         console.log("error: ", err);
         result(null, err);
       } else {
-          console.log("conect user", res);
+        console.log("conect user", res);
         result(null, res);
       }
     }
   );
+};
+
+User.logoutUser = function logoutUser(user, result) {
+  sql.query("UPDATE users SET connecte='0' WHERE id= ?;", [user.id], function(
+    err,
+    res
+  ) {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+    } else {
+      console.log("conect user", res);
+      result(null, res);
+    }
+  });
 };
 
 // User.updateById = function(id, User, result){
