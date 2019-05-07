@@ -20,31 +20,46 @@ exports.connect_user = function(req, res) {
 };
 
 exports.logout_user = function(req, res) {
-    User.logoutUser(req.body, function(err, User) {
-        console.log("test logout : ", req.body);
-        if (err) res.send(err);
-        res.json(User);
-      });
-}
+  User.logoutUser(req.body, function(err, User) {
+    console.log("test logout : ", req.body);
+    if (err) res.send(err);
+    res.json(User);
+  });
+};
 
 exports.create_a_user = function(req, res) {
-    var new_user = new User(req.body);
-  
-    //handles null error 
-     if(!new_user.pseudo || !new_user.passe){
-  
-              res.status(400).send({ error:true, message: 'Please provide pseudo/passe' });
-  
-          }
-  else{
-    
+  var new_user = new User(req.body);
+
+  //handles null error
+  if (!new_user.pseudo || !new_user.passe) {
+    res
+      .status(400)
+      .send({ error: true, message: "Please provide pseudo/passe" });
+  } else {
     User.createUser(new_user, function(err, User) {
-      
-      if (err)
-        res.send(err);
+      if (err) res.send(err);
       res.json(User);
     });
   }
-  };
+};
 
-  
+exports.get_user_info = function(req, res) {
+  User.getUserById(req.params.userId, function(err, user) {
+    if (err) res.send(err);
+    res.json(user);
+  });
+};
+
+exports.update_user_couleur = function(req, res) {
+  User.updateUserColor(req.params.userId, req.body, function(err, user) {
+    if (err) res.send(err);
+    res.json(user);
+  });
+};
+
+exports.delete_user = function(req, res) {
+  User.remove(req.params.userId, function(err, user) {
+    if (err) res.send(err);
+    res.json(user);
+  });
+};

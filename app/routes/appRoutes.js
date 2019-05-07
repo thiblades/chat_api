@@ -8,6 +8,10 @@ module.exports = function(app) {
   app.route('/users')
     .get(user.list_all_users)
     .post(user.create_a_user);
+  app.route('/users/:userId')
+    .get(user.get_user_info)
+    .put(user.update_user_couleur)
+    .delete(user.delete_user);
   app.route('/users/login')
     .post(user.connect_user);    
     //.post(chat.create_a_user);

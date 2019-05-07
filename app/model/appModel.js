@@ -69,29 +69,44 @@ User.logoutUser = function logoutUser(user, result) {
   });
 };
 
-// User.updateById = function(id, User, result){
-//   sql.query("UPDATE Users SET users = ? WHERE id = ?", [User.User, id], function (err, res) {
-//           if(err) {
-//               console.log("error: ", err);
-//                 result(null, err);
-//              }
-//            else{
-//              result(null, res);
-//                 }
-//             });
-// };
-// User.remove = function(id, result){
-//      sql.query("DELETE FROM users WHERE id = ?", [id], function (err, res) {
+User.getUserById = function getUserById(userId, result){
+    sql.query("SELECT * from users where id = ?", userId, function(err, res){
+        if(err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+        else{
+            result(null, res);
+      
+        } 
+    })
+}
 
-//                 if(err) {
-//                     console.log("error: ", err);
-//                     result(null, err);
-//                 }
-//                 else{
+User.updateUserColor = function(id, User, result){
 
-//                  result(null, res);
-//                 }
-//             });
-// };
+  sql.query("UPDATE users SET couleur = ? WHERE id = ?", [User.couleur, id], function (err, res) {
+          if(err) {
+              console.log("error: ", err);
+                result(null, err);
+             }
+           else{
+             result(null, res);
+                }
+            });
 
+}
+
+User.remove = function(id, result){
+     sql.query("DELETE FROM users WHERE id = ?", [id], function (err, res) {
+
+                if(err) {
+                    console.log("error: ", err);
+                    result(null, err);
+                }
+                else{
+
+                 result(null, res);
+                }
+            });
+};
 module.exports = User;
