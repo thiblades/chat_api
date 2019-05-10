@@ -3,7 +3,8 @@
 module.exports = function(app) {
   var user = require("../controller/userController");
   var conversation = require("../controller/conversationController");
-  console.log("test Route : ", conversation);
+  var message = require("../controller/messageController");
+  console.log("test Route : ", message);
 
   // Users Routes
   app
@@ -18,14 +19,21 @@ module.exports = function(app) {
   app.route("/users/login").put(user.connect_user);
   app.route("/users/logout").put(user.logout_user);
 
-  //Conversation Routes
-  app.route("/conversations").get(conversation.list_all_conversations)
+  //Conversations Routes
+  app
+    .route("/conversations")
+    .get(conversation.list_all_conversations)
     .post(conversation.create_a_conversation);
-  
-    app
+
+  app
     .route("/conversations/:conversationId")
     .get(conversation.get_conv_info)
     .delete(conversation.delete_conversation);
-    app.route("/conversations/archive").put(conversation.archive_conversation);
-    app.route("/conversations/reactive").put(conversation.reactive_conversation);
+  app.route("/conversations/archive").put(conversation.archive_conversation);
+  app.route("/conversations/reactive").put(conversation.reactive_conversation);
+
+  //Messages Routes
+  app
+  .route("/messages/:conversationId")
+  .get(message.list_all_messages);
 };
