@@ -24,4 +24,32 @@ Message.getAllMessage = function getAllMessage(conversationId, result) {
     }
   );
 };
+
+Message.createMessage = function createMessage(newMessage, result) {
+  sql.query("INSERT INTO messages set ?", newMessage, function(err, res) {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+    } else {
+      console.log(res.insertId);
+      result(null, res.insertId);
+    }
+  });
+};
+
+
+Message.remove = function(id, result){
+  sql.query("DELETE FROM messages WHERE id = ?", [id], function (err, res) {
+
+             if(err) {
+                 console.log("error: ", err);
+                 result(null, err);
+             }
+             else{
+
+              result(null, res);
+             }
+         });
+}
+
 module.exports = Message;

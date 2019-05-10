@@ -35,5 +35,9 @@ module.exports = function(app) {
   //Messages Routes
   app
   .route("/messages/:conversationId")
-  .get(message.list_all_messages);
+  .get(message.list_all_messages)
+  .post(message.create_a_message);
+  app
+  .route("/message/:messageId")
+  .delete(message.delete_message);
 };
