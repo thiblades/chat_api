@@ -13,11 +13,9 @@ Conversation.createConversation = function createConversation(newConversation, r
         sql.query("INSERT INTO conversations set ?", newConversation, function (err, res) {
 
                 if(err) {
-                    console.log("error: ", err);
                     result(err, null);
                 }
                 else{
-                    console.log(res.insertId);
                     result(null, res.insertId);
                 }
             });
@@ -26,11 +24,8 @@ Conversation.createConversation = function createConversation(newConversation, r
 Conversation.getAllConversation = function getAllConversation(result) {
   sql.query("Select * from conversations", function(err, res) {
     if (err) {
-      console.log("error: ", err);
       result(null, err);
     } else {
-      console.log("Conversations : ", res);
-
       result(null, res);
     }
   });
@@ -42,10 +37,8 @@ Conversation.archiveConversation = function archiveConversation(Conversation, re
     res
   ) {
     if (err) {
-      console.log("error: ", err);
       result(null, err);
     } else {
-      console.log("Archive Conversation", res);
       result(null, res);
     }
   });
@@ -58,10 +51,8 @@ Conversation.reActiveConversation = function reActiveConversation(Conversation, 
     res
   ) {
     if (err) {
-      console.log("error: ", err);
       result(null, err);
     } else {
-      console.log("reActive Conversation", res);
       result(null, res);
     }
   });
@@ -69,7 +60,6 @@ Conversation.reActiveConversation = function reActiveConversation(Conversation, 
 Conversation.getConversationById = function getConversationById(ConversationId, result){
     sql.query("SELECT * from conversations where id = ?", ConversationId, function(err, res){
         if(err) {
-            console.log("error: ", err);
             result(err, null);
         }
         else{
@@ -84,7 +74,6 @@ Conversation.remove = function(id, result){
      sql.query("DELETE FROM conversations WHERE id = ?", [id], function (err, res) {
 
                 if(err) {
-                    console.log("error: ", err);
                     result(null, err);
                 }
                 else{

@@ -12,8 +12,17 @@ exports.list_all_users = function(req, res) {
 };
 
 exports.connect_user = function(req, res) {
+
   User.connectUser(req.body, function(err, User) {
     console.log("test connexion : ", req.body);
+    const sess = req.session;
+    if (sess.views) {
+      sess.views++;
+    } else {
+      sess.views = 1
+    }
+    response = { status: 200, message: "Login successful!", authenticated: true, user_id: user_id, views: sess.views }
+    res.status(response.status).send(JSON.stringify(response));
     if (err) res.send(err);
     res.json(User);
   });
