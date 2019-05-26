@@ -1,4 +1,4 @@
-"Conversation strict";
+"use strict";
 var sql = require("./db.js");
 
 //Conversation object constructor

@@ -29,7 +29,7 @@ exports.logout_user = function(req, res) {
 
 exports.create_a_user = function(req, res) {
   var new_user = new User(req.body);
-
+console.log("creation d'un nouveau utilisateur");
   //handles null error
   if (!new_user.pseudo || !new_user.passe) {
     res

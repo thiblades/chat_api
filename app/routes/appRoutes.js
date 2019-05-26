@@ -4,7 +4,6 @@ module.exports = function(app) {
   var user = require("../controller/userController");
   var conversation = require("../controller/conversationController");
   var message = require("../controller/messageController");
-  console.log("test Route : ", message);
 
   // Users Routes
   app

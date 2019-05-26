@@ -1,5 +1,6 @@
-"user strict";
+"use strict";
 var sql = require("./db.js");
+var bcrypt = require('bcrypt');
 
 //User object constructor
 var User = function(User) {
@@ -12,17 +13,22 @@ var User = function(User) {
 };
 
 User.createUser = function createUser(newUser, result) {
-        sql.query("INSERT INTO users set ?", newUser, function (err, res) {
+  console.log("creating users.........");
+  bcrypt.hash(newUser.passe, 15).then(function(hash) {
+    // Store hash in your password DB.
+    newUser.passe = hash;
+    sql.query("INSERT INTO users set ?", newUser, function (err, res) {
 
-                if(err) {
-                    console.log("error: ", err);
-                    result(err, null);
-                }
-                else{
-                    console.log(res.insertId);
-                    result(null, res.insertId);
-                }
-            });
+      if(err) {
+          console.log("error: ", err);
+          result(err, null);
+      }
+      else{
+          console.log(res);
+          result(null, res.insertId);
+      }
+});
+  });
 };
 
 User.getAllUser = function getAllUser(result) {
