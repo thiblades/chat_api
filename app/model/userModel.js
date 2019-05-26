@@ -1,9 +1,9 @@
 "use strict";
-var sql = require("./db.js");
-var bcrypt = require('bcrypt');
+const sql = require("./db.js");
+const bcrypt = require('bcrypt');
 
 //User object constructor
-var User = function(User) {
+const User = function(User) {
   this.pseudo = User.pseudo;
   this.passe = User.passe;
   this.admin = User.admin;

@@ -1,6 +1,6 @@
 "use strict";
 
-var Conversation = require("../model/conversationModel.js");
+const Conversation = require("../model/conversationModel.js");
 
 exports.list_all_conversations = function(req, res) {
   Conversation.getAllConversation(function(err, Conversation) {
@@ -12,7 +12,7 @@ exports.list_all_conversations = function(req, res) {
 };
 
 exports.create_a_conversation = function(req, res) {
-  var new_conversation = new Conversation(req.body);
+  const new_conversation = new Conversation(req.body);
 
   //handles null error
   if (!new_conversation.theme) {

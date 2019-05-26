@@ -1,9 +1,9 @@
 "use strict";
 
 module.exports = function(app) {
-  var user = require("../controller/userController");
-  var conversation = require("../controller/conversationController");
-  var message = require("../controller/messageController");
+  const user = require("../controller/userController");
+  const conversation = require("../controller/conversationController");
+  const message = require("../controller/messageController");
 
   // Users Routes
   app

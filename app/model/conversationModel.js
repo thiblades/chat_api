@@ -1,8 +1,8 @@
 "use strict";
-var sql = require("./db.js");
+const sql = require("./db.js");
 
 //Conversation object constructor
-var Conversation = function(Conversation) {
+const Conversation = function(Conversation) {
   this.id = Conversation.id;
   this.active = Conversation.active;
   this.theme = Conversation.theme;

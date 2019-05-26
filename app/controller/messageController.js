@@ -1,8 +1,6 @@
-
-
 "use strict";
 
-var Message = require("../model/messageModel.js");
+const Message = require("../model/messageModel.js");
 
 exports.list_all_messages = function(req, res) {
   Message.getAllMessage(req.params.conversationId, function(err, Message) {
@@ -14,7 +12,7 @@ exports.list_all_messages = function(req, res) {
 };
 
 exports.create_a_message = function(req, res) {
-  var new_message = new Message(req.body);
+  const new_message = new Message(req.body);
 
   //handles null error
   if (!new_message.contenu) {

@@ -5,9 +5,9 @@ const routes = require('./app/routes/appRoutes'); //importing route
 // connection configurations
 const mc = mysql.createConnection({
     host: 'localhost',
-    user: '',// your username
-    password: '',//your pass
-    database: '' // db
+    user: 'thibaut ',// your username
+    password: 'test123',//your password
+    database: 'chat_mobile' //
 });
 
 app = express();

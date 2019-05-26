@@ -1,6 +1,6 @@
 "use strict";
 
-var User = require("../model/userModel.js");
+const User = require("../model/userModel.js");
 
 exports.list_all_users = function(req, res) {
   User.getAllUser(function(err, User) {
@@ -28,7 +28,7 @@ exports.logout_user = function(req, res) {
 };
 
 exports.create_a_user = function(req, res) {
-  var new_user = new User(req.body);
+  const new_user = new User(req.body);
 console.log("creation d'un nouveau utilisateur");
   //handles null error
   if (!new_user.pseudo || !new_user.passe) {
