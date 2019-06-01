@@ -1,6 +1,6 @@
 "use strict";
 
-const Conversation = require("../model/conversationModel.js");
+import Conversation from "../model/conversationModel.js";
 
 exports.list_all_conversations = function(req, res) {
   Conversation.getAllConversation(function(err, Conversation) {

@@ -1,6 +1,6 @@
 "use strict";
-const config = require("../../config");
-const bcrypt = require('bcrypt');
+import config from  "../../config";
+import bcrypt from 'bcrypt';
 
 //User object constructor
 const User = function(User) {

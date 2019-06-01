@@ -1,9 +1,10 @@
 "use strict";
+import user from '../controller/userController';
+import conversation from '../controller/conversationController';
+import message from '../controller/messageController';
 
 module.exports = function(app) {
-  const user = require("../controller/userController");
-  const conversation = require("../controller/conversationController");
-  const message = require("../controller/messageController");
+ 
 
   // Users Routes
   app

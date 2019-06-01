@@ -1,6 +1,6 @@
 "use strict";
 
-const User = require("../model/userModel.js");
+import User from "../model/userModel.js";
 
 exports.list_all_users = function(req, res) {
   User.getAllUser(function(err, User) {

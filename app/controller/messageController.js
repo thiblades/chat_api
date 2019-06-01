@@ -1,6 +1,6 @@
 "use strict";
 
-const Message = require("../model/messageModel.js");
+import Message from '../model/messageModel.js';
 
 exports.list_all_messages = function(req, res) {
   Message.getAllMessage(req.params.conversationId, function(err, Message) {

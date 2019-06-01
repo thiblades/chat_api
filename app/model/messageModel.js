@@ -1,5 +1,5 @@
 "use strict";
-const config = require("../../config");
+import config from '../../config';
 
 
 //Conversation object constructor
