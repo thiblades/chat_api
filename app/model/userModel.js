@@ -1,5 +1,5 @@
 "use strict";
-const sql = require("./db.js");
+const config = require("../../config");
 const bcrypt = require('bcrypt');
 
 //User object constructor
@@ -17,7 +17,7 @@ User.createUser = function createUser(newUser, result) {
   bcrypt.hash(newUser.passe, 15).then(function(hash) {
     // Store hash in your password DB.
     newUser.passe = hash;
-    sql.query("INSERT INTO users set ?", newUser, function (err, res) {
+    config.sql.query("INSERT INTO users set ?", newUser, function (err, res) {
 
       if(err) {
           console.log("error: ", err);
@@ -32,7 +32,7 @@ User.createUser = function createUser(newUser, result) {
 };
 
 User.getAllUser = function getAllUser(result) {
-  sql.query("Select * from users", function(err, res) {
+  config.sql.query("Select * from users", function(err, res) {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -45,7 +45,7 @@ User.getAllUser = function getAllUser(result) {
 };
 
 User.connectUser = function connectUser(user, result) {
-  sql.query(
+  config.sql.query(
     "UPDATE users SET connecte='1' WHERE pseudo= ? and passe= ?;",
     [user.pseudo, user.passe],
     function(err, res) {
@@ -61,7 +61,7 @@ User.connectUser = function connectUser(user, result) {
 };
 
 User.logoutUser = function logoutUser(user, result) {
-  sql.query("UPDATE users SET connecte='0' WHERE id= ?;", [user.id], function(
+  config.sql.query("UPDATE users SET connecte='0' WHERE id= ?;", [user.id], function(
     err,
     res
   ) {
@@ -76,7 +76,7 @@ User.logoutUser = function logoutUser(user, result) {
 };
 
 User.getUserById = function getUserById(userId, result){
-    sql.query("SELECT * from users where id = ?", userId, function(err, res){
+    config.sql.query("SELECT * from users where id = ?", userId, function(err, res){
         if(err) {
             console.log("error: ", err);
             result(err, null);
@@ -90,7 +90,7 @@ User.getUserById = function getUserById(userId, result){
 
 User.updateUserColor = function(id, User, result){
 
-  sql.query("UPDATE users SET couleur = ? WHERE id = ?", [User.couleur, id], function (err, res) {
+  config.sql.query("UPDATE users SET couleur = ? WHERE id = ?", [User.couleur, id], function (err, res) {
           if(err) {
               console.log("error: ", err);
                 result(null, err);
@@ -103,7 +103,7 @@ User.updateUserColor = function(id, User, result){
 }
 
 User.remove = function(id, result){
-     sql.query("DELETE FROM users WHERE id = ?", [id], function (err, res) {
+     config.sql.query("DELETE FROM users WHERE id = ?", [id], function (err, res) {
 
                 if(err) {
                     console.log("error: ", err);

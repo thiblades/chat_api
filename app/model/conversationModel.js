@@ -1,5 +1,5 @@
 "use strict";
-const sql = require("./db.js");
+const config = require("../../config");
 
 //Conversation object constructor
 const Conversation = function(Conversation) {
@@ -10,7 +10,7 @@ const Conversation = function(Conversation) {
 };
 
 Conversation.createConversation = function createConversation(newConversation, result) {
-        sql.query("INSERT INTO conversations set ?", newConversation, function (err, res) {
+        config.sql.query("INSERT INTO conversations set ?", newConversation, function (err, res) {
 
                 if(err) {
                     result(err, null);
@@ -22,7 +22,7 @@ Conversation.createConversation = function createConversation(newConversation, r
 };
 
 Conversation.getAllConversation = function getAllConversation(result) {
-  sql.query("Select * from conversations", function(err, res) {
+  config.sql.query("Select * from conversations", function(err, res) {
     if (err) {
       result(null, err);
     } else {
@@ -32,7 +32,7 @@ Conversation.getAllConversation = function getAllConversation(result) {
 };
 
 Conversation.archiveConversation = function archiveConversation(Conversation, result) {
-  sql.query("UPDATE conversations SET active='0' WHERE id= ?;", [Conversation.id], function(
+  config.sql.query("UPDATE conversations SET active='0' WHERE id= ?;", [Conversation.id], function(
     err,
     res
   ) {
@@ -46,7 +46,7 @@ Conversation.archiveConversation = function archiveConversation(Conversation, re
 
 
 Conversation.reActiveConversation = function reActiveConversation(Conversation, result) {
-  sql.query("UPDATE conversations SET active='1' WHERE id= ?;", [Conversation.id], function(
+  config.sql.query("UPDATE conversations SET active='1' WHERE id= ?;", [Conversation.id], function(
     err,
     res
   ) {
@@ -58,7 +58,7 @@ Conversation.reActiveConversation = function reActiveConversation(Conversation, 
   });
 };
 Conversation.getConversationById = function getConversationById(ConversationId, result){
-    sql.query("SELECT * from conversations where id = ?", ConversationId, function(err, res){
+    config.sql.query("SELECT * from conversations where id = ?", ConversationId, function(err, res){
         if(err) {
             result(err, null);
         }
@@ -71,7 +71,7 @@ Conversation.getConversationById = function getConversationById(ConversationId, 
 
 
 Conversation.remove = function(id, result){
-     sql.query("DELETE FROM conversations WHERE id = ?", [id], function (err, res) {
+     config.sql.query("DELETE FROM conversations WHERE id = ?", [id], function (err, res) {
 
                 if(err) {
                     result(null, err);

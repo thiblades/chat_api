@@ -1,5 +1,6 @@
 "use strict";
-const sql = require("./db.js");
+const config = require("../../config");
+
 
 //Conversation object constructor
 const Message = function(Message) {
@@ -10,7 +11,7 @@ const Message = function(Message) {
 };
 
 Message.getAllMessage = function getAllMessage(conversationId, result) {
-  sql.query(
+  config.sql.query(
     "SELECT m.contenu, u.pseudo as auteur, u.couleur FROM messages m, users u WHERE m.idConversation=? AND m.idAuteur=u.id AND u.blacklist=0;",
     conversationId,
     function(err, res) {
@@ -24,7 +25,7 @@ Message.getAllMessage = function getAllMessage(conversationId, result) {
 };
 
 Message.createMessage = function createMessage(newMessage, result) {
-  sql.query("INSERT INTO messages set ?", newMessage, function(err, res) {
+  config.sql.query("INSERT INTO messages set ?", newMessage, function(err, res) {
     if (err) {
       result(err, null);
     } else {
@@ -35,7 +36,7 @@ Message.createMessage = function createMessage(newMessage, result) {
 
 
 Message.remove = function(id, result){
-  sql.query("DELETE FROM messages WHERE id = ?", [id], function (err, res) {
+  config.sql.query("DELETE FROM messages WHERE id = ?", [id], function (err, res) {
 
              if(err) {
                  result(null, err);
